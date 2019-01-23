@@ -6,8 +6,10 @@ Created on Tue Jan 22 18:03:59 2019
 """
 
 dict_a = {} 
+dict_a_excl_stopwords = {}
 dict_b = {} 
 overlapScore = 0
+
 
 def scoreLexicalOverlap(a,b):
     extractTexta(a)
@@ -30,6 +32,7 @@ def scoreLexicalOverlap(a,b):
 #scoreLexicalOverlap(1,2) # takes in the file number of each of the two dictionaries to be compared. 
 #AUTOMATE WHAT YOU FEED IT. ie for loop through 1-4 files and logic for which to compare. send to DB?
 
+
 def extractTexta(a):  
     fname = open("george0{}.txt".format(a))
     for line in fname:
@@ -39,6 +42,7 @@ def extractTexta(a):
                dict_a[word] += 1
             else:
                 dict_a[word] = 1
+        
 #    print("TEXT {}".format(a), dict_a)
 #    print(len(dict_a))
     return dict_a
@@ -55,6 +59,8 @@ def extractTextb(b):
 #    print("TEXT {}".format(b), dict_b)
 #    print(len(dict_b))
     return dict_b
+
+
 
 def startTheEngine():
     listOfTextsByNumberPLUSONE = [1,2,3,4,5] # list must include 1 more than actual number of files. Needs to think more on this. 
