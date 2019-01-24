@@ -34,30 +34,34 @@ def scoreLexicalOverlap(a,b):
 
 
 def extractTexta(a):  
-    fname = open("george0{}.txt".format(a))
-    for line in fname:
-        words = line.split()
-        for word in words:
-            if word not in listOfStopWords:
-                if word in dict_a:
-                   dict_a[word] += 1
-                else:
-                    dict_a[word] = 1
-        
+    #fname = open("george0{}.txt".format(a)) #attempt at resolving diff results - try with and close fname. 
+    with open("george0{}.txt".format(a)) as fname:
+        for line in fname:
+            words = line.split()
+            for word in words:
+                if word not in listOfStopWords:
+                    if word in dict_a:
+                       dict_a[word] += 1
+                    else:
+                        dict_a[word] = 1
+    fname.close()
+            
 #    print("TEXT {}".format(a), dict_a)
 #    print(len(dict_a))
     return dict_a
 
 def extractTextb(b):     
-    fname = open("george0{}.txt".format(b))
-    for line in fname:
-        words = line.split()
-        for word in words:
-            if word not in listOfStopWords:
-                if word in dict_b:
-                   dict_b[word] += 1
-                else:
-                    dict_b[word] = 1
+    #fname = open("george0{}.txt".format(b))
+    with open("george0{}.txt".format(b)) as fname:
+        for line in fname:
+            words = line.split()
+            for word in words:
+                if word not in listOfStopWords:
+                    if word in dict_b:
+                       dict_b[word] += 1
+                    else:
+                        dict_b[word] = 1
+    fname.close()
 #    print("TEXT {}".format(b), dict_b)
 #    print(len(dict_b))
     return dict_b
@@ -71,7 +75,9 @@ def readStopWords():
     return listOfStopWords
 
 def startTheEngine():
-    listOfTextsByNumberPLUSONE = [1,2,3,4,5] # list must include 1 more than actual number of files. Needs to think more on this. 
+    ####TESTING - changed which files pass first to see if results are then correct for specific comparison
+    ####they are - so mechanics is the issue!
+    listOfTextsByNumberPLUSONE = [2,3,4,5] # list must include 1 more than actual number of files. Needs to think more on this. 
     for number in listOfTextsByNumberPLUSONE:
         for unique_pairs in range(number + 1, len(listOfTextsByNumberPLUSONE)):
             overlapScore = scoreLexicalOverlap(number,unique_pairs) #running the function and assigning return directly to variable. 
